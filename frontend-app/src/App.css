@@ -1,0 +1,231 @@
+:root {
+  --primary: #2563eb;
+  --bg-color: #f1f5f9;
+  --text-main: #0f172a;
+  --sidebar-width: 240px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- LAYOUT PRINCIPAL --- */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: var(--sidebar-width);
+  background: white;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  transition: all 0.3s ease;
+  z-index: 50;
+  flex-shrink: 0; /* Evita que el menú se aplaste */
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.nav-btn:hover { background: #f8fafc; color: var(--primary); }
+.nav-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+
+/* --- CONTENIDO PRINCIPAL --- */
+.main-content {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- CLASES DE ESTRUCTURA (NUEVO SISTEMA) --- */
+.view-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Para vistas divididas (Tabla izquierda, Formulario derecha) */
+.view-split {
+  display: flex;
+  gap: 25px;
+  height: 100%;
+  overflow: hidden; /* Importante para que el scroll sea interno */
+}
+
+.split-content {
+  flex: 2;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Truco flex para evitar desbordes */
+}
+
+.split-sidebar {
+  flex: 1;
+  height: fit-content;
+  min-width: 300px; /* Ancho mínimo del formulario lateral */
+}
+
+/* --- TARJETAS Y COMPONENTES --- */
+.card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  padding: 20px;
+}
+
+/* Scroll interno para tablas */
+.card-scrollable {
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto; /* Permitir scroll horizontal si la tabla es ancha */
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- DASHBOARD --- */
+.dashboard-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.dashboard-charts { display: flex; gap: 20px; height: 100%; min-height: 400px; }
+
+/* --- POS (Punto de Venta) --- */
+.pos-container { display: flex; gap: 20px; height: 100%; overflow: hidden; }
+.pos-catalog { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+.pos-cart { flex: 0 0 350px; display: flex; flex-direction: column; overflow: hidden; }
+
+.pos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  padding-right: 5px;
+  overflow-y: auto;
+  flex: 1;
+  padding-bottom: 20px; /* Espacio extra abajo */
+}
+
+.product-card { padding: 15px; display: flex; flex-direction: column; justify-content: space-between; height: 180px; transition: transform 0.2s; }
+.product-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+.product-info h3 { margin: 0 0 5px 0; font-size: 0.9rem; line-height: 1.2; }
+.product-desc { margin: 0; font-size: 0.8rem; color: #94a3b8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.product-actions { margin-top: auto; }
+.product-price-stock { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: bold; font-size: 0.9rem; }
+
+/* --- TABLAS --- */
+.tabla-usuarios { width: 100%; border-collapse: collapse; min-width: 600px; /* Forzar scroll si es muy angosto */ }
+.tabla-usuarios th { text-align: left; color: #64748b; font-size: 0.8rem; padding: 12px 15px; border-bottom: 1px solid #eee; background: white; position: sticky; top: 0; z-index: 10; }
+.tabla-usuarios td { padding: 12px 15px; border-bottom: 1px solid #f8fafc; font-size: 0.9rem; vertical-align: middle; }
+
+/* --- ELEMENTOS UI --- */
+.btn-primary { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.2s; width: 100%; }
+.btn-primary:active { opacity: 0.8; }
+.btn-primary:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+.btn-icon-sm { background: white; border: 1px solid #cbd5e1; color: #1e293b; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+
+input, select { border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; outline: none; width: 100%; box-sizing: border-box; font-size: 0.9rem; }
+input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1); }
+
+.header-title { margin: 0; font-size: 1.5rem; }
+.header-subtitle { margin: 0; color: #64748b; font-size: 0.9rem; }
+
+.login-container { display: flex; align-items: center; justifyContent: center; height: 100vh; background: #f8fafc; }
+.login-card { width: 100%; max-width: 400px; padding: 40px; background: white; border-radius: 24px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+
+/* --- DATE PICKER --- */
+.date-selector-container { position: relative; display: flex; align-items: center; background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0 10px; gap: 8px; min-width: 140px; }
+.input-date-styled { border: none !important; background: transparent !important; padding: 8px 0 !important; width: 100%; font-family: inherit; font-weight: 600; cursor: pointer; }
+
+/* =========================================
+   📱 MODO MÓVIL (RESPONSIVE)
+   ========================================= */
+@media (max-width: 900px) { /* Tablet y Celular */
+
+  .dashboard-layout { flex-direction: column; } /* Todo vertical */
+
+  /* Barra de Navegación Inferior (Estilo App) */
+  .sidebar {
+    position: fixed; bottom: 0; left: 0; width: 100%; height: 65px;
+    flex-direction: row; padding: 0; border-right: none; border-top: 1px solid #e2e8f0;
+    justify-content: space-around; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); order: 10;
+  }
+  .sidebar .logo, .sidebar > div:last-child { display: none; } /* Ocultar logo y user */
+
+  .nav-links { flex-direction: row; width: 100%; justify-content: space-around; padding: 0 10px; overflow-x: auto; }
+  .nav-btn { flex-direction: column; gap: 4px; padding: 8px 5px; font-size: 0.7rem; min-width: 60px; justify-content: center; text-align: center; }
+  .nav-btn svg { width: 22px; height: 22px; }
+
+  /* Contenido ajustado para no chocar con la barra de abajo */
+  .main-content { padding: 15px; padding-bottom: 80px; }
+
+  /* Romper el layout split (Columna izquierda / derecha) */
+  .view-split { flex-direction: column; height: auto; overflow: visible; }
+  .split-content { height: 500px; flex: none; } /* Tabla con altura fija */
+  .split-sidebar { width: 100%; min-width: 0; }
+
+  /* Dashboard */
+  .dashboard-charts { flex-direction: column; height: auto; }
+  .dashboard-charts > .card { min-height: 350px; }
+
+  /* POS (Venta) */
+  .pos-container { flex-direction: column; height: auto; overflow: visible; }
+  .pos-catalog { height: 500px; flex: none; } /* Altura fija para el catálogo */
+  .pos-cart { flex: none; width: 100%; margin-top: 20px; }
+
+  /* Ajustes generales */
+  .header-title { font-size: 1.25rem; }
+  .card { border-radius: 12px; padding: 15px; }
+}
