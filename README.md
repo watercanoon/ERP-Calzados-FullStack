@@ -44,6 +44,5 @@ Sistema integral de gestión (ERP) desarrollado para zapaterías y negocios de r
 * MySQL (Local o Docker)
 
 ### 1. Clonar el repositorio
-```bash
-git clone [https://github.com/TU_USUARIO/ERP-Calzados.git](https://github.com/TU_USUARIO/ERP-Calzados.git)
-cd ERP-Calzados
+git clone https://github.com/watercanoon/ERP-Calzados-FullStack.git
+cd ERP-Calzados-FullStack
